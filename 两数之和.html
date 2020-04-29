@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>两数之和</title>
+  </head>
+  <body>
+    <script>
+      //给定一个数组和targets,请找出数组中和为target的两个整数，并返回他们的下标
+      function sum(nums, target) {
+        const diff = {} //差值表,key为差值，i为下标。
+        for (let i = 0; i < nums.length; i++) {
+          if (diff[nums[i]] !== undefined) {
+            return [diff[nums[i]], i]
+          } else {
+            diff[target - nums[i]] = i
+          }
+        }
+      }
+      let nums = [2, 5, 7, 10]
+      let target = 9
+      console.log(sum(nums, target))
+      //建立一个差值表，表中的index为差值，value为下标，
+      //遍历数组，如果当前nums[i]能在差值表中找到，则返回当前的i和查指表的值。
+      //如果找不到，设置差值表
+    </script>
+  </body>
+</html>
