@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>两数想加</title>
+  </head>
+  <body>
+    <script>
+      //给出两个链表 (2->4->3)+(5->6->4)
+      //输出：7->0->8。
+      //原因342+465=708；
+
+      //解题思想。分别把 2 5看出个数相加，6,4看出十位数相加，3，5看出百位数相加。
+      //个、十、百未数分别相加，
+      //当分别相加的和大于等于10时当前链的值取他的个位数，下一位链表值需要加1。
+      //小于10时为当前两个链表的值
+
+      function addTwoNumbers(l1, l2) {
+        let ans //返回的链表
+        let add = 0 //进位
+        let head //返回链表的头部
+        while (l1 || l2) {
+          var a = l1 ? l1.value : 0
+          var b = l2 ? l2.value : 0
+
+          let sum = a + b + add
+          if (sum >= 10) {
+            add = 1
+            sum = sum % 10
+          } else {
+            add = 0
+          }
+          var node = new ListNode(sum)
+          if (!ans) {
+            ans = head = node
+          } else {
+            head.next = node //其实就是往ans加，指针指向同一个
+            head = node //对head进行重置
+          }
+          if (l1) l1 = l1.next //如果下一链表还有值继续执行
+          if (l2) l2 = l2.next //如果下一链表还有值继续执行
+        }
+
+        if (add) {
+          head.next = new ListNode(add)
+          head = new ListNode(add)
+        }
+        return ans
+      }
+      function ListNode(val) {
+        this.value = val
+        this.next = null
+      }
+      //测试
+      var a3 = new ListNode(3)
+      var a2 = new ListNode(4)
+      a2.next = a3
+      var a1 = new ListNode(2)
+      a1.next = a2
+
+      var b3 = new ListNode(4)
+      var b2 = new ListNode(6)
+      b2.next = b3
+      var b1 = new ListNode(5)
+      b1.next = b2
+      var result = addTwoNumbers(a1, b1)
+      console.log('result', result)
+    </script>
+  </body>
+</html>
