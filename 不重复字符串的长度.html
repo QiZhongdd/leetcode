@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //基本思想：str存放无重复字段，当遇到重复的字段的时候，截取str重复字段后面的字符串+当前的字符；
+      //size用来表示当前当前最长无重复子串的长度
+      var lengthOfLongestSubstring = function (s) {
+        var str = '' //存放无重复子串
+        var size = 0 //当前最长无重复子串的长度
+        for (var i = 0, len = s.length; i < s; i++) {
+          let char = s.charAt(i)
+          if (str.indexOf(char) == -1) {
+            str = str + char
+            size = size > str.length ? size : str.length
+          } else {
+            //str.substr(index + 1)截取重复后面的字符串
+            str = str.substr(index + 1) + char
+          }
+        }
+        return size
+      }
+      console.log(lengthOfLongestSubstring('pwwkepawweew'))
+    </script>
+  </body>
+</html>
