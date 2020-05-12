@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    //从扑克牌中随机选出5张牌，判断他们是不是顺子，
+    //把大小王看成0，可以当左任意数字。
+    //A为1，不能为14
+
+    //解题思路，首先进行从小到大排序。
+    //如果前一个减去后一个的差的总和大于4，那就不可能是顺子
+    //如果有相等的也不可能是顺子。
+    //如果是大小王就进行忽略
+    function isOrder(numsArr) {
+      let minSort = numsArr.sort((a, b) => a - b) //从小到大排序
+      let sum = 0 //查的总和
+      for (let i = 0, len = minSort.length; i < len - 1; i++) {
+        if (minSort[i] == minSort[i + 1]) {
+          return false
+        } else if (minSort[i] === 0) {
+          continue
+        } else {
+          sum = sum + minSort[i + 1] - minSort[i]
+        }
+      }
+      return sum < 5
+    }
+  </script>
+</html>
