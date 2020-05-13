@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    一个长度为n-1的递增排序数组中的所有数字都是唯一的，
+    并且每个数字都在0~n-1范围内的n个数字中有且只有一个不再改数组。请找出该数字
+  </body>
+  <script>
+    //解法思想：只要找出下标不等于值得数字即可
+    //解法一判断下标是否等于值。时间复杂度O(n)
+    // function getMissNum(arr) {
+    //   for (let i = 0; i < arr.length; i++) {
+    //     if (i !== arr[i]) {
+    //       return i
+    //     }
+    //   }
+    // }
+    //第二种用二分查找，时间复杂度是O(logn)
+    //如果nums[mid]=mid，说明0-mid没有缺失字，left=mid+1
+    //如果nums[mid]<mid,说明缺失字在0-mid,right=mid+1;
+    //检查left是否小于等于mid，若成立，则返回第二步。否则向下执行
+    //返回left即可
+    function getMissNum(arr) {
+      let left = 0
+      let right = arr.length - 1
+      while (left <= right) {
+        let mid = (left + right) >>> 1
+        if (arr[mid] === mid) {
+          left = mid + 1
+        } else {
+          right = mid - 1
+        }
+      }
+      return left
+    }
+  </script>
+</html>
