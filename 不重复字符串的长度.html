@@ -7,6 +7,7 @@
   </head>
   <body>
     <script>
+      //解法一
       //基本思想：str存放无重复字段，当遇到重复的字段的时候，截取str重复字段后面的字符串+当前的字符；
       //size用来表示当前当前最长无重复子串的长度
       var lengthOfLongestSubstring = function (s) {
@@ -24,7 +25,47 @@
         }
         return size
       }
-      console.log(lengthOfLongestSubstring('pwwkepawweew'))
+      //解法二
+      //1:准备哈希表，key为出现过的值，value为boolen，
+      //2:i左指针，j右指针，当没出现过右指针向右滑动+1。判断当前的size与原来最大长度的大小
+      //3:当有出现过，左指正向右滑动，将出现过的值在哈希表改为false
+      //重复第二步
+      var lengthOfLongestSubstring2 = function (str) {
+        let i = 0, //左指针
+          j = 0, //右指针
+          ans = 0,
+          map = {} //最大的size
+        while (i < str.length && j < str.length) {
+          if (!map[str[j]]) {
+            map[str[j]] = true
+            j++
+            ans = Math.max(j - i + 1, ans)
+          } else {
+            i++
+            map[str[j]] = false
+          }
+        }
+        return ans
+      }
+      //解法三：在解法er中，如果有值出现过，需要左指正一步一步往右边移动，
+      //不需要逐步缩小，假设右指针的s[j]的值为j，那么直接跳过[i,j]范围，记录char的下表
+      var lengthOfLongestSubstring3 = function (str) {
+        let map = new Map()
+        let i = 0
+        let j = 0
+        let ans = 0
+        let length = str.length
+        while (i < length && j < length) {
+          //判断j是否出现过，是否在滑动窗口内
+          if (map.has(str[j] && map.get(str[j]) >= i)) {
+            i = map.get(str[j]) + 1
+          }
+          ans = Math.max(ans, j - i + 1)
+          map.set(j, j)
+          j++
+        }
+      }
+      console.log(getMaxStrSize('pwwkepawweew'))
     </script>
   </body>
 </html>
