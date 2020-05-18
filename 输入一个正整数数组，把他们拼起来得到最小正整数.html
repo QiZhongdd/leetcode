@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    输入一个正整数数组，把他们拼接起来，得到一个最小正整数
+  </body>
+  <script>
+    //运用快排
+    //加入a+b>b+a,返回1，
+    //加入a+b==b+a,返回0
+    //假如a+b<b+a,返回-1
+    function getMinNum(numArr) {
+      numArr.sort((a, b) => {
+        let l = a + '' + b
+        let r = b + '' + a
+        if (l === r) return 0
+        if (l < r) return -1
+        if (l > r) return 1
+      })
+    }
+    //事件复杂度是O(NlogN);空间复杂度是O(1)
+  </script>
+</html>
