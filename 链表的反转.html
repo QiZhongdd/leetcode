@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    //思路，实现链表的反转，递归调用互换的函数 //并且一定要记得让H.next
+    =NULL，也就是断开现在指针的链接，
+    //否则新的链表形成了环，下一层H.next.next赋值的时候会覆盖后续的值。
+  </body>
+  <script>
+    function createElement(ele) {
+      this.element = ele
+      this.next = null
+    }
+    class LinkList {
+      constructor() {
+        this.length = 0 //链表长度
+        this.head = null //头
+      }
+      append(node) {
+        if (this.head === null) {
+          this.head = node
+        } else {
+          //找到最好一项再添加
+          let current = this.head
+          while (current.next) {
+            current = current.next
+          }
+          current.next = node
+        }
+        this.length++
+      }
+      getHead() {
+        return this.head
+      }
+    }
+    let linkList = new LinkList()
+    linkList.append(new createElement(1))
+    linkList.append(new createElement(2))
+    linkList.append(new createElement(3))
+    linkList.append(new createElement(4))
+    console.log(reverseLinkList(linkList.getHead()))
+    function reverseLinkList(head) {
+      if (head === null || head.next === null) return head
+      let temp = head.next
+      let newHead = reverseLinkList(temp)
+      temp.next = head
+      head.next = null
+      return newHead
+    }
+  </script>
+</html>
