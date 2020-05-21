@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    获取链表倒数第k个节点
+  </body>
+  <script>
+    // 解法一
+    //用两个循环，第一个循环获取链表的长度
+    //第二个循环获取length-k的节点
+    //时间复杂度为O(n),空间复杂度O（1）
+
+    function getKNode(k, head) {
+      let length = 0
+      let current = head
+      while (current) {
+        length++
+        current = current.next
+      }
+      if (k > length) return null
+      current = head
+      let i = 0
+      let offSet = length - k
+      for (let i = 0; i < offSet; i++) {
+        current = current.next
+      }
+      return current
+    }
+
+    // 解法二运用双指针。
+    //现将有指正移动k,然后在同时移动两个指正，这样两个指针的距离就为k，直到右指针指向空，此时left为要找的节点
+    function getKNode2(k, head) {
+      let left = head,
+        right = head
+      for (let i = 0; i < k; i++) {
+        if (right === null) return null
+        right = right.next
+      }
+      while (right) {
+        left = left.next
+        right = right.next
+      }
+      return left
+    }
+  </script>
+</html>
