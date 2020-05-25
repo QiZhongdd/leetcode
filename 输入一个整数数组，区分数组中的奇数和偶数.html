@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    输入一个数组，调整数组的顺序，奇数位于前半部分，偶数位于后半部分
+  </body>
+  <script>
+    //方法一，循环数组判断，分别将数字放置不同的数组。然后在将两个数组合并
+    //时间复杂度O（n）,空间复杂度O(n)
+    function sortArr(arr) {
+      let singleArr = [],
+        doubleArr = []
+      arr.forEach((ele) => {
+        ele % 2 ? singleArr.push(ele) : doubleArr.push(ele)
+      })
+      return [...singleArr, ...doubleArr]
+    }
+    //运用双指针，左指针向右移动，直到遇到偶数暂停，
+    //右指针向左移动，遇到奇数暂停。
+    //将左指针的数字与右指针的数互换位置。
+    //时间复杂度O（n）,空间复杂度O（1）
+    function sortArr2(arr) {
+      let i = 0,
+        j = arr.length - 1
+      while (i < j) {
+        while (i >= 0 && arr[i] % 2) i++
+        while (j >= 0 && arr[j] % 2 === 0) j--
+        var temp = arr[j]
+        arr[j] = arr[i]
+        arr[i] = temp
+      }
+      return arr
+    }
+  </script>
+</html>
