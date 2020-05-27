@@ -1,0 +1,34 @@
+<script>
+  //输入一个复杂链表，每个节点中有节点值，以及有两个指针
+  //一个指针指向下一个节点，另一个指针指向另一个节点
+
+  //解题思路：第一次遍历赋值节点的的next指针，并且用map报错原节点-copy节点的映射关系
+
+  function Node(val) {
+    this.val = val
+    this.next = null
+    this.random = null
+  }
+  function copy(head) {
+    let node = head,
+      map = new Map(),
+      copyHead = new Node(node.val)
+    let copyNode = copyHead
+    map.set(node, copyNode)
+    while (node) {
+      copyNode.next = new Node(node.val)
+      node = node.next
+      copyNode = copyNode.next
+      map.set(node, copyNode)
+    }
+    node = head
+    copyNode = copyHead
+    while (node) {
+      let random = node.random
+      copyNode.random = map.get(random)
+      node = node.next
+      copyNode = copyNode.next
+    }
+    return copyHead
+  }
+</script>

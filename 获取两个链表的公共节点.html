@@ -1,0 +1,38 @@
+<script>
+  //实现思路：因为两个链表有公共节点，他们之间的图像类似'Y'，
+  //比较两个链表的长度，假如A链比B链表长n,那么A链表先行n,
+  //然后两条链表同时运行，到相遇的时候及两个node相等，及是公共节点
+  //时间复杂度O(n),空间复杂度o(1)
+  var getIntersectionNode = function (head1, head2) {
+    let length1 = 0,
+      length2 = 0,
+      node = head1
+    while (node) {
+      length1++
+      node = node.next
+    }
+    node = head2
+    while (node) {
+      length2++
+      node = node.next
+    }
+    var slow, fast, diff
+    if (length1 > length2) {
+      slow = head2
+      fast = head1
+      diff = length1 - length2
+    } else {
+      slow = head1
+      fast = head2
+      diff = length2 - length1
+    }
+    while (diff--) {
+      fast = fast.next
+    }
+    while (slow && fast && slow != fast) {
+      slow = slow.next
+      fast = fast.next
+    }
+    return slow
+  }
+</script>
