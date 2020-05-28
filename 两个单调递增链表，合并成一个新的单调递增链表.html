@@ -1,0 +1,17 @@
+<script>
+  //解题思路：先比较两个链表l1和l2的头，小的当做新链表的头（head）
+  //然后递归比较其余的节点，谁小就添加进去当做next。
+  function mergeList(l1, l2) {
+    if (l1 === null) return l2
+    if (l2 === null) return l1
+    let head
+    if (l1.val > l2.val) {
+      head = l2
+      head.next = mergeList(l1, l2.next)
+    } else {
+      head.next = mergeList(l1.next, l2)
+      head = l1
+    }
+    return head
+  }
+</script>
