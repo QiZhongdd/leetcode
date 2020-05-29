@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    输入一个正整数target,输出所有和为target的连续正整数序列
+    （至少含有两个数），序列的数字由小到大排列。不同序列按照
+    首个数字从小到大排列 输入9 得到[[2,3,4],[4,5]]
+  </body>
+
+  <script>
+    //解法，设置左右指指针，
+    //当左指针到右指针的和加起来为target时就将l与r之间的值创建数组，
+    //并且r向右移一，sum加上新r。
+    //小于target时，r向右移一，sum加上新r
+    //大于target时，l向右一，sum减去原来的值。
+    var findContinuousSequence = function (target) {
+      let l = 1,
+        r = 2,
+        sum = l + r
+      let arr = []
+      while (l != r && r <= target) {
+        if (sum < target) {
+          r++
+          sum += r
+        } else if (sum === target) {
+          arr.push(getSortArr(l, r))
+          r++
+          sum += r
+        } else {
+          sum -= l
+          l++
+        }
+      }
+      return arr
+    }
+    function getSortArr(l, r) {
+      const arr = []
+      for (let i = l; i <= r; i++) {
+        arr.push(i)
+      }
+      return arr
+    }
+    console.log(findContinuousSequence(9))
+  </script>
+</html>
