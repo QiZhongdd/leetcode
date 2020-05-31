@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    在一个二维数组中（每个一唯数组长度相同，每一行）从左到
+    右顺序排序。请完成一个函数：输入这样的一个二维数组和一个整数
+    判断数组是否有这个值。 解题提示：二维数组时有序的，比如下面的数据： 1 2 3 4
+    5 6 7 8 9
+    从左下角开始搜索，当大于时向右查找，当小于时向右查找，一直递归找到相关的值
+  </body>
+
+  <script>
+    //解法一
+    function initFindNum(arr, target) {
+      let i = 0,
+        j = arr.length - 1 //i为x指针,j为y指针
+      findNum(arr, target, i, j)
+    }
+    function findNum(arr, target, i, j) {
+      if (arr[i][j] === target) return true
+      if (arr[i][j] < target) {
+        i++
+        findNum(arr, target, i, j)
+      } else {
+        j--
+        findNum(arr, target, i, j)
+      }
+    }
+
+    //解法二选中序点，然后用二分法查找
+    function binarySearch(data, arr, start, end) {
+      if (start > end) return -1
+      var mid = Math.ceil((end + start) / 2)
+      if (data === arr[mid]) {
+        return mid
+      } else if (data > mid) {
+        binarySearch(data, arr, mid + 1, end)
+      } else {
+        binarySearch(data, arr, start, mid - 1)
+      }
+    }
+  </script>
+</html>
