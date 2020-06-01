@@ -1,0 +1,40 @@
+<script>
+  //给定一个正整数n,将其拆分为最少两个整数，并使这些乘积最大化
+  //1不符合条件
+  //2 1*1返回1
+  //3  1*2返回2
+  //4  1*3和2*2返回4
+  //5   2*3和1*4 1*1*3 1*2*2 返回5
+  //6   3*3 3*2*1返回9
+
+  //方法一：贪心法
+  //整体思路如果n*3的结果为a,b为余数
+  //如果b为0，那么直接3的a次方
+  //如果b为1，那么直接3的a-1次方然后*4是最大的
+  //如果b为2，那么直接3的a次方在*2
+  //时间复杂度为O（1），空间复杂度O（1）
+  var integerbreak = function (n) {
+    if (n === 2) return 1
+    if (n === 3) return 2
+    const a = Math.floor(n / 3)
+    const b = n % 3
+    if (b === 0) return 3 ** a
+    if (b === 1) return 3 ** (a - 1) * 4
+    if (b === 2) return 3 ** a * 2
+  }
+
+  //方法二-动态规划法，dp[i]表示数字i拆分成两个数最大的值得乘积，
+  //为了方便计算，dp的长度为n+1;,
+  //因为dp[2]=1；外层循环从3开始，内层循环从1开始，i可以拆分成j和（i-j）；
+  //i-j可能小于dp[i-j]
+
+  //时间复杂度o(n2),空间复杂度o（1）
+  var integerbreak2 = function (n) {
+    var dp = new Array(n + 1).fill(1)
+    for (let i = 3; i <= n; i++) {
+      for (let j = 1; j < i; j++) {
+        dp[i] = Math.max(dp[i], j * (i - j), j * dp[i - j])
+      }
+    }
+  }
+</script>
