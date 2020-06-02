@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    给出一个链表，若其中包含环，请找出链表环的入口节点，否则输出null
+  </body>
+  <script>
+    //用快慢双指针p1,和p2，假设链表是有环的，那么快的指针会在环内追上慢的指针
+    //计算出环的长度,在环上找一个节点，绕一圈即环的长度len
+    //让p1和p2重回head,然后让p1先走len步然后p1和p2同时走，相遇的时候即环的开始节点
+
+    function EntryNodeOfLoop(head) {
+      let p1 = head.next,
+        p2 = head.next.next
+      while (p1 != p2) {
+        if (p2 === null || p2 === null) return null
+        p1 = p1.nxet
+        p2 = p2.next.next
+      }
+      //计算环的长度
+      let length = 1
+      let temp = p2.next
+      while (temp != p1) {
+        temp = temp.next
+        length++
+      }
+      let p2 = head,
+        p1 = head
+      while (length--) {
+        p2 = p2.next
+      }
+      while (p2 != p1) {
+        p1 = p1.next
+        p2 = p2.next
+      }
+      return p1
+    }
+  </script>
+</html>
