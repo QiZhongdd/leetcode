@@ -14,7 +14,8 @@
     你可以假设 s 和 t 具有相同的长度。 通过次数39,358提交次数83,442
   </body>
   <script>
-    //利用indexOf判断各个字符串第一次出现的位置,时间复杂度O（n）,空间复杂度O（1）
+    //利用indexOf判断各个字符串第一次出现的位置,时间复杂度O（n2）,空间复杂度O（1）
+    //indexOf是线性查找，时间复杂度为O(n)
     var isIsomorphic = function (s, t) {
       for (let i = 0; i < s.length; i++) {
         if (s.indexOf(s[i]) !== t.indexOf(t[i])) {
