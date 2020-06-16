@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+   给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。
+  你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
+  给定 1->2->3->4, 你应该返回 2->1->4->3.
+  </body>
+  <script>
+
+   //建立一个新的头节点，它的next就是转换后的头节点。
+   //进行转换，建立一个临时节点，临时节点的next与next.next是需要互相转换的。
+   //临时节点开始的节点为新创建的Head节点。没转化一次，tmp变成start节点。以此类推
+   var swapPairs = function(head) {
+    let newHead=new Link('0');
+    newHead.next=head;
+    let tmp=newHead;
+    while(tmp.next&&tmp.next.next){
+     let start=tmp.next;
+     let startNext=tmp.next.next;
+     tmp.next=startNext;
+     start.next=startNext.next;
+     startNext.next=start;
+     tmp=start
+    }
+   }
+  </script>
+</html>

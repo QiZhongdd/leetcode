@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>爬楼梯</title>
+  </head>
+  <body>
+   假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
+
+每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
+
+注意：给定 n 是一个正整数。
+
+示例 1：
+
+输入： 2
+输出： 2
+解释： 有两种方法可以爬到楼顶。
+1.  1 阶 + 1 阶
+2.  2 阶
+示例 2：
+
+输入： 3
+输出： 3
+解释： 有三种方法可以爬到楼顶。
+1.  1 阶 + 1 阶 + 1 阶
+2.  1 阶 + 2 阶
+3.  2 阶 + 1 阶
+
+
+
+    <script>
+    //采用斐波那契数列，所谓的斐波那契数列就是f(n)=f(n-1)+f(n-2)
+    var climbStairs = function(n) {
+     if(n<3)return n;
+     let f1=f(1),f2=f(2),
+     for(let i=3;i<n;i++){
+      let result=f1+f2;
+      f1=f2;
+      f2=result;
+     }
+     return f1+f2;
+    }  
+    //递归写法,不用递归是假如数字比较大时，两个递归运行的时间会比较长
+    var climbStairs = function(n) {
+     if(n<3)return n;
+     return climbStairs(n-1)+climbStairs(n-2);
+    }  
+    </script>
+  </body>
+</html>
