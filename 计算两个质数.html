@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ 统计所有小于非负整数 n 的质数的数量。
+
+示例:
+
+输入: 10
+输出: 4
+解释: 小于 10 的质数一共有 4 个, 它们是 2, 3, 5, 7 。
+</body>
+<script>
+ //从2开始遍历到n,
+ //建立一个n长度的数组，值为false，
+ //2是质数，那么在n的范围内2的倍数都是合数，即不是质数。
+ //以此类推其他数字。
+ var arr=new Array(n).fill(false);
+    var count=0;
+    for(let i=2;i<n;i++){
+        if(!arr[i]){
+            count++
+            let x=Math.floor(n/i);
+            while(x>1){
+                arr[i*x]=true;
+                x--;
+            }
+        }
+    }
+    return count;
+</script>
+</html>
