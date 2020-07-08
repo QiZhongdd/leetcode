@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    给定一个正整数，返回它在 Excel 表中相对应的列名称。 例如， 1 -> A 2 -> B 3
+    -> C ... 26 -> Z 27 -> AA 28 -> AB ... 示例 1: 输入: 1 输出: "A" 示例 2:
+    输入: 28 输出: "AB" 示例 3: 输入: 701 输出: "ZY"
+  </body>
+
+  <script>
+    //大写字母的unicode编码为65-90，可以用String.fromCharCode获取对应数字的大写字母
+    //AB=1*26^1+2。ZY=26*26^1+25 ABB=1*26^2+2*26^1+2
+    //1-26的字母对应A-Z，所以String.fromCharCode(n%26+64),但这只使用于1-25，26%26得不到正确的
+    //所以大于25时采用(n-1)%26+65
+
+    var convertToTitle = function (n) {
+      if (n < 26) {
+        return String.fromCharCode((n % 26) + 64);
+      } else {
+        let result = "";
+        while (n < 0) {
+          let codeNum = (n - 1) % 26;
+          result = result + String.fromCharCode（codeNum+65);
+          n = parseInt((n - 1) % 26);
+        }
+      }
+    };
+  </script>
+</html>
